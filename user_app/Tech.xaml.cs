@@ -22,6 +22,18 @@ namespace user_app
         public Tech()
         {
             InitializeComponent();
+
+
+            using (var context = new PostgresContext())
+            {
+
+                dataBlueprints.ItemsSource = context.Blueprints.ToList();
+                dataComponents.ItemsSource = context.Components.ToList();
+                dataComponentsProduction.ItemsSource = context.ComponentsProductions.ToList();
+                dataProducts.ItemsSource = context.Productions.ToList();
+                dataEmloyeesFeedback.ItemsSource = context.EmployeeFeedbacks.ToList();
+                dataManufacturedProducts.ItemsSource = context.ManufacturedProducts.ToList();
+            }
         }
     }
 }
