@@ -22,6 +22,22 @@ namespace user_app
         public TechleadWindow()
         {
             InitializeComponent();
+
+            using (var context = new PostgresContext())
+            {
+
+                
+                dataBlueprints.ItemsSource = context.Blueprints.ToList();
+                dataComponents.ItemsSource = context.Components.ToList();
+                dataComponentsProduction.ItemsSource = context.ComponentsProductions.ToList();
+                dataProducts.ItemsSource = context.Productions.ToList();
+                dataProjects.ItemsSource = context.Projects.ToList();
+                dataProjectsProgress.ItemsSource = context.ProjectProgresses.ToList();
+                dataEmloyeesFeedback.ItemsSource = context.EmployeeFeedbacks.ToList();
+                dataManufacturedProducts.ItemsSource = context.ManufacturedProducts.ToList();
+            }
+
+
         }
     }
 }

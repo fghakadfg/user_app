@@ -7,6 +7,49 @@
         mc:Ignorable="d"
         Title="TechleadWindow" Height="450" Width="800">
     <Grid>
-        
+        <TabControl>
+            
+            <TabItem Header="Чертежи">
+                <Grid Background="#FFE5E5E5">
+                    <DataGrid x:Name="dataBlueprints" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0,102,0,0"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Компоненты">
+                <Grid Background="#FFE5E5E5">
+                    <DataGrid x:Name="dataComponents" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0,102,0,0"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Компоненеты продукция">
+                <Grid Background="#FFE5E5E5">
+                    <DataGrid x:Name="dataComponentsProduction" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0,102,0,0"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Заявки сотрудников">
+                <Grid Background="#FFE5E5E5">
+                    <DataGrid x:Name="dataEmloyeesFeedback" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0,102,0,0"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Изготовленная продукция">
+                <Grid Background="#FFE5E5E5">
+                    <DataGrid x:Name="dataManufacturedProducts" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0,102,0,0"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Продукция">
+                <Grid Background="#FFE5E5E5">
+                    <DataGrid x:Name="dataProducts" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0,102,0,0"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Прогрессы проектов">
+                <Grid Background="#FFE5E5E5">
+                    <DataGrid x:Name="dataProjectsProgress" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0,102,0,0"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Проекты">
+                <Grid Background="#FFE5E5E5">
+                    <DataGrid x:Name="dataProjects" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0,102,0,0"/>
+                </Grid>
+            </TabItem>
+        </TabControl>
+
     </Grid>
 </Window>

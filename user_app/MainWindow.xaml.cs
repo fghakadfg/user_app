@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Configuration;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -24,12 +25,66 @@ namespace user_app
         private void Button_Click(object sender, RoutedEventArgs e)
         {
 
-            String userId = userIdBox.Text;
+            int userId = int.Parse(userIdBox.Text);
 
             String userPassword = userPasswordBox.Text;
 
             String userRole = userRoleBox.Text;
 
+            switch (userRole)
+            {
+                case "Старший инженер":
+
+
+                    using(var context = new PostgresContext())
+                    {
+
+                        var entity = context.TechAccesses.FirstOrDefault(e => e.Idemployee == userId);
+
+                        if (entity != null)
+                        {
+
+                            passLabel.Content = "Passed";
+                          
+                            passLabel.Visibility = Visibility.Visible;
+
+                            
+
+                            TechleadWindow tech = new TechleadWindow();
+
+
+
+
+
+                            tech.Show();
+                            MainWindow main = new MainWindow();
+                            this.Close();
+                        }
+                        else
+                        {
+                            
+                            
+                            passLabel.Foreground = new SolidColorBrush(Colors.Red);
+                            
+                            passLabel.Content = "Didn' passed";
+                            passLabel.Visibility = Visibility.Visible;
+                        }
+
+                    }
+
+
+
+                    break;
+
+               
+
+
+                default:
+                    break;
+
+            }
+
+            
 
         }
     }
