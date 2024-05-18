@@ -25,8 +25,10 @@
                 </Grid>
             </TabItem>
             <TabItem Header="Заявки сотрудников">
-                <Grid Background="#FFE5E5E5">
-                    <DataGrid x:Name="dataEmloyeesFeedback" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0,102,0,0"/>
+                <Grid>
+                    <TextBox HorizontalAlignment="Left" Margin="84,83,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="219" Height="70"/>
+                    <Button Content="Отправить заявку" HorizontalAlignment="Left" Margin="84,183,0,0" VerticalAlignment="Top" Width="219"/>
+
                 </Grid>
             </TabItem>
             <TabItem Header="Изготовленная продукция">

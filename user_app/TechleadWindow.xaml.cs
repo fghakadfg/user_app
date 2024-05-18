@@ -33,7 +33,6 @@ namespace user_app
                 dataProducts.ItemsSource = context.Productions.ToList();
                 dataProjects.ItemsSource = context.Projects.ToList();
                 dataProjectsProgress.ItemsSource = context.ProjectProgresses.ToList();
-                dataEmloyeesFeedback.ItemsSource = context.EmployeeFeedbacks.ToList();
                 dataManufacturedProducts.ItemsSource = context.ManufacturedProducts.ToList();
             }
 
