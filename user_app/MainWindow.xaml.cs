@@ -22,6 +22,9 @@ namespace user_app
             InitializeComponent();
         }
 
+
+      
+
         private void Button_Click(object sender, RoutedEventArgs e)
         {
 
@@ -41,7 +44,7 @@ namespace user_app
 
                         var entity = context.TechAccesses.FirstOrDefault(e => e.Idemployee == userId);
 
-                        if (entity != null)
+                        if (entity != null && entity.EmployeePassword == userPassword)
                         {
 
                             passLabel.Content = "Passed";
@@ -75,9 +78,112 @@ namespace user_app
 
 
                     break;
+                case "Инженер":
+
+                    using (var context = new PostgresContext())
+                    {
+
+                        var entity = context.TechAccesses.FirstOrDefault(e => e.Idemployee == userId);
+
+                        if (entity != null && entity.EmployeePassword == userPassword)
+                        {
+
+                            passLabel.Content = "Passed";
+
+                            passLabel.Visibility = Visibility.Visible;
+
+                            Tech tech = new Tech();
+
+                            tech.Show();
+                            MainWindow main = new MainWindow();
+                            this.Close();
+                        }
+                        else
+                        {
+
+
+                            passLabel.Foreground = new SolidColorBrush(Colors.Red);
+
+                            passLabel.Content = "Didn' passed";
+                            passLabel.Visibility = Visibility.Visible;
+                        }
+
+                    }
+
+
+                    break;
+
+                case "Бухгалтер":
+
+                    using (var context = new PostgresContext())
+                    {
+
+                        var entity = context.LawyerAcces.FirstOrDefault(e => e.Idemployee == userId);
+
+                        if (entity != null && entity.EmployeePassword == userPassword)
+                        {
+
+                            passLabel.Content = "Passed";
+
+                            passLabel.Visibility = Visibility.Visible;
+
+                            AccountantWindow accountant = new AccountantWindow();
+
+                            accountant.Show();
+                            MainWindow main = new MainWindow();
+                            this.Close();
+                        }
+                        else
+                        {
+
+
+                            passLabel.Foreground = new SolidColorBrush(Colors.Red);
+
+                            passLabel.Content = "Didn' passed";
+                            passLabel.Visibility = Visibility.Visible;
+                        }
+
+                    }
+
+
+
+                    break;
+
+                case "Юрист":
+
+                    using (var context = new PostgresContext())
+                    {
+
+                        var entity = context.LawyerAcces.FirstOrDefault(e => e.Idemployee == userId);
+
+                        if (entity != null && entity.EmployeePassword == userPassword)
+                        {
+
+                            passLabel.Content = "Passed";
+
+                            passLabel.Visibility = Visibility.Visible;
+
+                            Tech tech = new Tech();
+
+                            tech.Show();
+                            MainWindow main = new MainWindow();
+                            this.Close();
+                        }
+                        else
+                        {
+
+
+                            passLabel.Foreground = new SolidColorBrush(Colors.Red);
+
+                            passLabel.Content = "Didn' passed";
+                            passLabel.Visibility = Visibility.Visible;
+                        }
+
+                    }
+                    break;
+
 
                
-
 
                 default:
                     break;

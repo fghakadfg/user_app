@@ -31,7 +31,6 @@ namespace user_app
                 dataComponents.ItemsSource = context.Components.ToList();
                 dataComponentsProduction.ItemsSource = context.ComponentsProductions.ToList();
                 dataProducts.ItemsSource = context.Productions.ToList();
-                dataEmloyeesFeedback.ItemsSource = context.EmployeeFeedbacks.ToList();
                 dataManufacturedProducts.ItemsSource = context.ManufacturedProducts.ToList();
             }
         }
