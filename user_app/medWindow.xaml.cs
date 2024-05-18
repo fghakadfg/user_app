@@ -22,6 +22,18 @@ namespace user_app
         public medWindow()
         {
             InitializeComponent();
+
+            using (var context = new PostgresContext())
+            {
+
+                dataEmloyees.ItemsSource = context.Employees.ToList();
+                dataEmloyeesFeedback.ItemsSource = context.EmployeeFeedbacks.ToList();
+                dataExtremeSitEq.ItemsSource = context.Extremesituations.ToList();
+                dataMedEquipment.ItemsSource = context.MedicalEquipments.ToList();
+                dataMedExams.ItemsSource = context.MedExams.ToList();
+
+            }
+
         }
     }
 }
