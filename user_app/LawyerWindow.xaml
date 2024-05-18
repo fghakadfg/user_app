@@ -20,6 +20,24 @@
                 </Grid>
             </TabItem>
 
+            <TabItem Header="Сотрудники">
+                <Grid Background="#FFE5E5E5">
+                    <DataGrid x:Name="dataEmployees" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0,102,0,0"/>
+                </Grid>
+            </TabItem>
+
+            <TabItem Header="Заказы">
+                <Grid Background="#FFE5E5E5">
+                    <DataGrid x:Name="dataOrders" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0,102,0,0"/>
+                </Grid>
+            </TabItem>
+
+            <TabItem Header="Поставщики">
+                <Grid Background="#FFE5E5E5">
+                    <DataGrid x:Name="dataSuppliers" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0,102,0,0"/>
+                </Grid>
+            </TabItem>
+
             <TabItem Header="Заявки сотрудников">
                 <Grid>
                     <TextBox HorizontalAlignment="Left" Margin="84,83,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="219" Height="70"/>
