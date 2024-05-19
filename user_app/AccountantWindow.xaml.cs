@@ -36,5 +36,15 @@ namespace user_app
 
 
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            String userText = userTextBox.Text;
+
+            EmployeeFeedback ef = new EmployeeFeedback();
+
+            ef.AddNote(userText);
+
+        }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System.Configuration;
+using System.IO;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -7,6 +8,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Media.TextFormatting;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
@@ -57,6 +59,18 @@ namespace user_app
 
 
 
+                            string filePath = "example.txt";
+
+                            using (StreamWriter writer = new StreamWriter(filePath))
+                            {
+
+                                String str = userId.ToString();
+                                
+                               
+
+                                writer.WriteLine(str);
+                                
+                            }
 
 
                             tech.Show();

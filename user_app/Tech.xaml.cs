@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -33,6 +35,24 @@ namespace user_app
                 dataProducts.ItemsSource = context.Productions.ToList();
                 dataManufacturedProducts.ItemsSource = context.ManufacturedProducts.ToList();
             }
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+
+            String userText = userTextBox.Text;
+
+
+            EmployeeFeedback ef = new EmployeeFeedback();
+
+            ef.AddNote(userText);
+
+
+
+
+
+
         }
     }
 }

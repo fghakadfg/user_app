@@ -26,8 +26,9 @@
             </TabItem>
             <TabItem Header="Заявки сотрудников">
                 <Grid>
-                    <TextBox HorizontalAlignment="Left" Margin="84,83,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="219" Height="70"/>
-                    <Button Content="Отправить заявку" HorizontalAlignment="Left" Margin="84,183,0,0" VerticalAlignment="Top" Width="219"/>
+                    <TextBox x:Name="userTextBox" HorizontalAlignment="Left" Margin="84,83,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="219" Height="70"/>
+                    <Button Click="Button_Click"
+                            Content="Отправить заявку" HorizontalAlignment="Left" Margin="84,183,0,0" VerticalAlignment="Top" Width="219"/>
 
                 </Grid>
             </TabItem>
