@@ -22,6 +22,15 @@ namespace user_app
         public LawyerWindow()
         {
             InitializeComponent();
+            using (var context = new PostgresContext())
+            {
+                dataClients.ItemsSource = context.Clients.ToList();
+                dataContracts.ItemsSource = context.Contracts.ToList();
+                dataEmployees.ItemsSource = context.Employees.ToList();
+                dataOrders.ItemsSource = context.Orders.ToList();
+                dataSuppliers.ItemsSource = context.Suppliers.ToList();
+
+            }
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

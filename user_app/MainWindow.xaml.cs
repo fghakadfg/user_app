@@ -106,6 +106,18 @@ namespace user_app
 
                             passLabel.Visibility = Visibility.Visible;
 
+                            string filePath = "example.txt";
+
+                            using (StreamWriter writer = new StreamWriter(filePath))
+                            {
+
+                                String str = userId.ToString();
+
+
+
+                                writer.WriteLine(str);
+
+                            }
                             Tech tech = new Tech();
 
                             tech.Show();
@@ -140,7 +152,18 @@ namespace user_app
                             passLabel.Content = "Passed";
 
                             passLabel.Visibility = Visibility.Visible;
+                            string filePath = "example.txt";
 
+                            using (StreamWriter writer = new StreamWriter(filePath))
+                            {
+
+                                String str = userId.ToString();
+
+
+
+                                writer.WriteLine(str);
+
+                            }
                             AccountantWindow accountant = new AccountantWindow();
 
                             accountant.Show();
@@ -176,10 +199,21 @@ namespace user_app
                             passLabel.Content = "Passed";
 
                             passLabel.Visibility = Visibility.Visible;
+                            string filePath = "example.txt";
 
-                            Tech tech = new Tech();
+                            using (StreamWriter writer = new StreamWriter(filePath))
+                            {
 
-                            tech.Show();
+                                String str = userId.ToString();
+
+
+
+                                writer.WriteLine(str);
+
+                            }
+                            LawyerWindow lawyer = new LawyerWindow();
+
+                            lawyer.Show();
                             MainWindow main = new MainWindow();
                             this.Close();
                         }
