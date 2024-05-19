@@ -54,6 +54,10 @@ def forecast_sales(product_type, steps=1):
     product_df = grouped_df[grouped_df['idProduct'] == product_type]
     product_df = product_df.set_index('Month').asfreq('MS').fillna(0)  # MS = Month Start
 
+    if product_df.empty:
+        raise ValueError(f"Продукт не продовали {product_type}")
+
+    
     # Построение модели ARIMA
     model = ARIMA(product_df['sales_count'], order=(1, 1, 1))
     model_fit = model.fit()
@@ -75,7 +79,13 @@ def forecast_sales(product_type, steps=1):
     return forecast
 
 
-next_month_forecast = forecast_sales(10, steps=2)
+content = ""
+
+with open('producttype.txt', 'r', encoding='utf-8') as file:
+    content = file.read()
+
+
+next_month_forecast = forecast_sales(int(content), steps=2)
 print("Next Month Forecast:", next_month_forecast)
 
 
