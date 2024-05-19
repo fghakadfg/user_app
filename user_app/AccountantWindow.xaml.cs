@@ -13,6 +13,7 @@ using Python.Runtime;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Diagnostics;
+using System.IO;
 
 namespace user_app
 {
@@ -33,6 +34,14 @@ namespace user_app
                 dataEmployees.ItemsSource = context.Employees.ToList();
                 dataOrders.ItemsSource = context.Orders.ToList();
                 dataReqs.ItemsSource = context.Requisitions.ToList();
+
+                var ids = context.ManufacturedProducts.Select(p => p.IdProduct).Distinct().ToList();
+                comboBoxProduct.Items.Clear(); // Очистить текущие элементы, если необходимо
+
+                foreach (var id in ids)
+                {
+                    comboBoxProduct.Items.Add(id);
+                }
 
             }
 
@@ -61,8 +70,24 @@ namespace user_app
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
 
-
+            int id = int.Parse(comboBoxProduct.Text);
             string exePath = "dist\\analizer.exe";
+
+            string filePath = "producttype.txt";
+
+            using (StreamWriter writer = new StreamWriter(filePath))
+            {
+
+                String str = id.ToString();
+
+
+
+                writer.WriteLine(str);
+
+            }
+
+
+
 
             // Создание процесса
             ProcessStartInfo startInfo = new ProcessStartInfo();

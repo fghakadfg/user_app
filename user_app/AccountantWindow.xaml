@@ -50,9 +50,18 @@
             </TabItem>
 
             <TabItem Header="Прогноз">
+
+                <Grid>
+                <ComboBox x:Name="comboBoxProduct" Width="120" Height="50">
+
+                </ComboBox>
+
                 <Button Click="Button_Click_2" Content="Прогноз продаж " Height="35" Margin="127,0,525,0"/>
+                </Grid>
             </TabItem>
             
+
+
 
 
         </TabControl>
