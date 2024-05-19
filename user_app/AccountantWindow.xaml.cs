@@ -9,8 +9,10 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using Python.Runtime;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Diagnostics;
 
 namespace user_app
 {
@@ -44,7 +46,35 @@ namespace user_app
             EmployeeFeedback ef = new EmployeeFeedback();
 
             ef.AddNote(userText);
+            
+        }
 
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+
+            MainWindow main = new MainWindow();
+            main.Show();
+            this.Close();
+
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+
+
+            string exePath = "dist\\analizer.exe";
+
+            // Создание процесса
+            ProcessStartInfo startInfo = new ProcessStartInfo();
+            startInfo.FileName = exePath;
+            startInfo.UseShellExecute = false; // Используем прямое выполнение, а не оболочку
+            startInfo.CreateNoWindow = true;   // Не создавать окно консоли
+            // Запуск процесса
+            using (Process process = Process.Start(startInfo))
+            {
+                // Дождитесь завершения процесса, если это необходимо
+                process.WaitForExit();
+            }
         }
     }
 }

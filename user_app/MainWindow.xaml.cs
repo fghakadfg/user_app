@@ -19,6 +19,9 @@ namespace user_app
     /// </summary>
     public partial class MainWindow : Window
     {
+
+        private int tries = 0;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -45,7 +48,8 @@ namespace user_app
                     {
 
                         var entity = context.TechAccesses.FirstOrDefault(e => e.Idemployee == userId);
-
+                        
+                        String[] strings = new string[] { "Не прошел", "Ошибка", "Попробуй 12345", "Взламываешь?", "Может позовешь кого-нибудь", "Не верные данные" };
                         if (entity != null && entity.EmployeePassword == userPassword)
                         {
 
@@ -83,8 +87,9 @@ namespace user_app
                             
                             passLabel.Foreground = new SolidColorBrush(Colors.Red);
                             
-                            passLabel.Content = "Didn' passed";
+                            passLabel.Content = strings[tries];
                             passLabel.Visibility = Visibility.Visible;
+                            tries++;
                         }
 
                     }
@@ -98,7 +103,8 @@ namespace user_app
                     {
 
                         var entity = context.TechAccesses.FirstOrDefault(e => e.Idemployee == userId);
-
+                        
+                        String[] strings = new string[] { "Не прошел", "Ошибка", "Попробуй 12345", "Взламываешь?", "Может позовешь кого-нибудь", "Не верные данные" };
                         if (entity != null && entity.EmployeePassword == userPassword)
                         {
 
@@ -130,8 +136,9 @@ namespace user_app
 
                             passLabel.Foreground = new SolidColorBrush(Colors.Red);
 
-                            passLabel.Content = "Didn' passed";
+                            passLabel.Content = strings[tries];
                             passLabel.Visibility = Visibility.Visible;
+                            tries++;
                         }
 
                     }
@@ -144,6 +151,8 @@ namespace user_app
                     using (var context = new PostgresContext())
                     {
 
+                        
+                        String[] strings = new string[] { "Не прошел", "Ошибка", "Попробуй 12345", "Взламываешь?", "Может позовешь кого-нибудь", "Не верные данные" };
                         var entity = context.LawyerAcces.FirstOrDefault(e => e.Idemployee == userId);
 
                         if (entity != null && entity.EmployeePassword == userPassword)
@@ -172,12 +181,13 @@ namespace user_app
                         }
                         else
                         {
-
+                            
 
                             passLabel.Foreground = new SolidColorBrush(Colors.Red);
 
-                            passLabel.Content = "Didn' passed";
+                            passLabel.Content = strings[tries];
                             passLabel.Visibility = Visibility.Visible;
+                            tries++;
                         }
 
                     }
@@ -192,7 +202,8 @@ namespace user_app
                     {
 
                         var entity = context.LawyerAcces.FirstOrDefault(e => e.Idemployee == userId);
-
+                        
+                        String[] strings = new string[] { "Не прошел", "Ошибка", "Попробуй 12345", "Взламываешь?", "Может позовешь кого-нибудь", "Не верные данные" };
                         if (entity != null && entity.EmployeePassword == userPassword)
                         {
 
@@ -223,7 +234,7 @@ namespace user_app
 
                             passLabel.Foreground = new SolidColorBrush(Colors.Red);
 
-                            passLabel.Content = "Didn' passed";
+                            passLabel.Content = strings[tries];
                             passLabel.Visibility = Visibility.Visible;
                         }
 

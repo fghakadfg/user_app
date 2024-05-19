@@ -45,7 +45,9 @@
 
                 </Grid>
             </TabItem>
-
+            <TabItem Header="Выйти из аккаунта">
+                <Button Click="Button_Click_1" Content="Выйти"/>
+            </TabItem>
         </TabControl>
         
     </Grid>

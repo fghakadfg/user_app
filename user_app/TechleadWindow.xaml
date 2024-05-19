@@ -51,6 +51,9 @@
                     <DataGrid x:Name="dataProjects" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0,102,0,0"/>
                 </Grid>
             </TabItem>
+            <TabItem Header="Выйти из аккаунта">
+                <Button Click="Button_Click_1" Content="Выйти"/>
+            </TabItem>
         </TabControl>
 
     </Grid>

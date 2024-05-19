@@ -44,6 +44,16 @@
                     <DataGrid x:Name="dataReqs" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0,102,0,0"/>
                 </Grid>
             </TabItem>
+            
+            <TabItem Header="Выйти из аккаунта">
+                <Button Click="Button_Click_1"  Content="Выйти"/>
+            </TabItem>
+
+            <TabItem Header="Прогноз">
+                <Button Click="Button_Click_2" Content="Прогноз продаж " Height="35" Margin="127,0,525,0"/>
+            </TabItem>
+            
+
 
         </TabControl>
     </Grid>

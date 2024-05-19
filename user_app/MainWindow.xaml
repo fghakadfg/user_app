@@ -17,7 +17,7 @@
             <TextBlock>Инженер</TextBlock>
             <TextBlock>Бухгалтер</TextBlock>
             <TextBlock>Юрист</TextBlock>
-            <TextBlock>Врач</TextBlock>
+           
         </ComboBox>
         <Button Content="Войти" HorizontalAlignment="Left" Margin="155,274,0,0" VerticalAlignment="Top" Width="64" Click="Button_Click"/>
         <Label x:Name="passLabel" Visibility="Hidden" Foreground="Green" Content="Label" HorizontalAlignment="Left" Margin="525,203,0,0" VerticalAlignment="Top"/>
