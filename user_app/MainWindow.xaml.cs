@@ -11,6 +11,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Media.TextFormatting;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Security.Cryptography;
+
 
 namespace user_app
 {
@@ -43,201 +45,388 @@ namespace user_app
             {
                 case "Старший инженер":
 
-
-                    using(var context = new PostgresContext())
+                    try
                     {
-
-                        var entity = context.TechAccesses.FirstOrDefault(e => e.Idemployee == userId);
-                        
-                        String[] strings = new string[] { "Не прошел", "Ошибка", "Попробуй 12345", "Взламываешь?", "Может позовешь кого-нибудь", "Не верные данные" };
-                        if (entity != null && entity.EmployeePassword == userPassword)
+                        using (var context = new PostgresContext())
                         {
 
-                            passLabel.Content = "Passed";
-                          
-                            passLabel.Visibility = Visibility.Visible;
-
-                            
-
-                            TechleadWindow tech = new TechleadWindow();
-
-
-
-                            string filePath = "example.txt";
-
-                            using (StreamWriter writer = new StreamWriter(filePath))
+                            var entity = context.TechAccesses.FirstOrDefault(e => e.Idemployee == userId);
+                            string hash = "";
+                            using (SHA256 sha256Hash = SHA256.Create())
                             {
+                                byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(
+                                    userPassword));
 
-                                String str = userId.ToString();
-                                
-                               
+                                // Конвертируем байты в строку
+                                StringBuilder builder = new StringBuilder();
+                                for (int i = 0; i < bytes.Length; i++)
+                                {
+                                    builder.Append(bytes[i].ToString("x2"));
+                                }
 
-                                writer.WriteLine(str);
-                                
+                                hash = builder.ToString();
+
+                            }
+                            String[] strings = new string[] { "Не прошел", "Ошибка", "Попробуй 12345", "Взламываешь?", "Может позовешь кого-нибудь", "Не верные данные" };
+
+
+                            string employeeHash = "";
+                            using (SHA256 sha256Hash = SHA256.Create())
+                            {
+                                byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(
+                                    entity.EmployeePassword));
+
+                                // Конвертируем байты в строку
+                                StringBuilder builder = new StringBuilder();
+                                for (int i = 0; i < bytes.Length; i++)
+                                {
+                                    builder.Append(bytes[i].ToString("x2"));
+                                }
+
+                                employeeHash = builder.ToString();
+
                             }
 
 
-                            tech.Show();
-                            MainWindow main = new MainWindow();
-                            this.Close();
-                        }
-                        else
-                        {
-                            
-                            
-                            passLabel.Foreground = new SolidColorBrush(Colors.Red);
-                            
-                            passLabel.Content = strings[tries];
-                            passLabel.Visibility = Visibility.Visible;
-                            tries++;
-                        }
+                            if (entity != null && employeeHash == hash )
+                            {
 
+                                passLabel.Content = "Passed";
+
+                                passLabel.Visibility = Visibility.Visible;
+
+
+
+                                TechleadWindow tech = new TechleadWindow();
+
+
+
+                                string filePath = "example.txt";
+
+                                using (StreamWriter writer = new StreamWriter(filePath))
+                                {
+
+                                    String str = userId.ToString();
+
+
+
+                                    writer.WriteLine(str);
+
+                                }
+
+
+                                tech.Show();
+                                MainWindow main = new MainWindow();
+                                this.Close();
+                            }
+                            else
+                            {
+
+
+                                passLabel.Foreground = new SolidColorBrush(Colors.Red);
+
+                                passLabel.Content = strings[tries];
+                                passLabel.Visibility = Visibility.Visible;
+                                if (tries >= 5)
+                                {
+
+                                }
+                                else
+                                {
+                                    tries++;
+                                }
+                            }
+
+                        }
                     }
-
+                    catch(Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
 
 
                     break;
                 case "Инженер":
 
-                    using (var context = new PostgresContext())
+                    try
                     {
-
-                        var entity = context.TechAccesses.FirstOrDefault(e => e.Idemployee == userId);
-                        
-                        String[] strings = new string[] { "Не прошел", "Ошибка", "Попробуй 12345", "Взламываешь?", "Может позовешь кого-нибудь", "Не верные данные" };
-                        if (entity != null && entity.EmployeePassword == userPassword)
+                        using (var context = new PostgresContext())
                         {
-
-                            passLabel.Content = "Passed";
-
-                            passLabel.Visibility = Visibility.Visible;
-
-                            string filePath = "example.txt";
-
-                            using (StreamWriter writer = new StreamWriter(filePath))
+                            string hash = "";
+                            using (SHA256 sha256Hash = SHA256.Create())
                             {
+                                byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(
+                                    userPassword));
 
-                                String str = userId.ToString();
+                                // Конвертируем байты в строку
+                                StringBuilder builder = new StringBuilder();
+                                for (int i = 0; i < bytes.Length; i++)
+                                {
+                                    builder.Append(bytes[i].ToString("x2"));
+                                }
 
-
-
-                                writer.WriteLine(str);
+                                hash = builder.ToString();
 
                             }
-                            Tech tech = new Tech();
+                            var entity = context.TechAccesses.FirstOrDefault(e => e.Idemployee == userId);
 
-                            tech.Show();
-                            MainWindow main = new MainWindow();
-                            this.Close();
+                            String[] strings = new string[] { "Не прошел", "Ошибка", "Попробуй 12345", "Взламываешь?", "Может позовешь кого-нибудь", "Не верные данные" };
+
+                            string employeeHash = "";
+                            using (SHA256 sha256Hash = SHA256.Create())
+                            {
+                                byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(
+                                    entity.EmployeePassword));
+
+                                // Конвертируем байты в строку
+                                StringBuilder builder = new StringBuilder();
+                                for (int i = 0; i < bytes.Length; i++)
+                                {
+                                    builder.Append(bytes[i].ToString("x2"));
+                                }
+
+                                employeeHash = builder.ToString();
+
+                            }
+
+                            if (entity != null && employeeHash == hash)
+                            {
+
+                                passLabel.Content = "Passed";
+
+                                passLabel.Visibility = Visibility.Visible;
+
+                                string filePath = "example.txt";
+
+                                using (StreamWriter writer = new StreamWriter(filePath))
+                                {
+
+                                    String str = userId.ToString();
+
+
+
+                                    writer.WriteLine(str);
+
+                                }
+                                Tech tech = new Tech();
+
+                                tech.Show();
+                                MainWindow main = new MainWindow();
+                                this.Close();
+                            }
+                            else
+                            {
+
+
+                                passLabel.Foreground = new SolidColorBrush(Colors.Red);
+
+                                passLabel.Content = strings[tries];
+                                passLabel.Visibility = Visibility.Visible;
+                                if (tries >= 5)
+                                {
+
+                                }
+                                else
+                                {
+                                    tries++;
+                                }
+                            }
+
                         }
-                        else
-                        {
-
-
-                            passLabel.Foreground = new SolidColorBrush(Colors.Red);
-
-                            passLabel.Content = strings[tries];
-                            passLabel.Visibility = Visibility.Visible;
-                            tries++;
-                        }
-
                     }
 
+                    catch(Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
 
                     break;
 
                 case "Бухгалтер":
 
-                    using (var context = new PostgresContext())
+                    try
                     {
-
-                        
-                        String[] strings = new string[] { "Не прошел", "Ошибка", "Попробуй 12345", "Взламываешь?", "Может позовешь кого-нибудь", "Не верные данные" };
-                        var entity = context.LawyerAcces.FirstOrDefault(e => e.Idemployee == userId);
-
-                        if (entity != null && entity.EmployeePassword == userPassword)
+                        using (var context = new PostgresContext())
                         {
 
-                            passLabel.Content = "Passed";
-
-                            passLabel.Visibility = Visibility.Visible;
-                            string filePath = "example.txt";
-
-                            using (StreamWriter writer = new StreamWriter(filePath))
+                            string hash = "";
+                            using (SHA256 sha256Hash = SHA256.Create())
                             {
+                                byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(
+                                    userPassword));
 
-                                String str = userId.ToString();
+                                // Конвертируем байты в строку
+                                StringBuilder builder = new StringBuilder();
+                                for (int i = 0; i < bytes.Length; i++)
+                                {
+                                    builder.Append(bytes[i].ToString("x2"));
+                                }
 
-
-
-                                writer.WriteLine(str);
+                                hash = builder.ToString();
 
                             }
-                            AccountantWindow accountant = new AccountantWindow();
+                            String[] strings = new string[] { "Не прошел", "Ошибка", "Попробуй 12345", "Взламываешь?", "Может позовешь кого-нибудь", "Не верные данные" };
 
-                            accountant.Show();
-                            MainWindow main = new MainWindow();
-                            this.Close();
+                            var entity = context.LawyerAcces.FirstOrDefault(e => e.Idemployee == userId);
+                            string employeeHash = "";
+                            using (SHA256 sha256Hash = SHA256.Create())
+                            {
+                                byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(
+                                    entity.EmployeePassword));
+
+                                // Конвертируем байты в строку
+                                StringBuilder builder = new StringBuilder();
+                                for (int i = 0; i < bytes.Length; i++)
+                                {
+                                    builder.Append(bytes[i].ToString("x2"));
+                                }
+
+                                employeeHash = builder.ToString();
+
+                            }
+
+                            if (entity != null && employeeHash == hash)
+                            {
+
+                                passLabel.Content = "Passed";
+
+                                passLabel.Visibility = Visibility.Visible;
+                                string filePath = "example.txt";
+
+                                using (StreamWriter writer = new StreamWriter(filePath))
+                                {
+
+                                    String str = userId.ToString();
+
+
+
+                                    writer.WriteLine(str);
+
+                                }
+                                AccountantWindow accountant = new AccountantWindow();
+
+                                accountant.Show();
+                                MainWindow main = new MainWindow();
+                                this.Close();
+                            }
+                            else
+                            {
+
+
+                                passLabel.Foreground = new SolidColorBrush(Colors.Red);
+
+                                passLabel.Content = strings[tries];
+                                passLabel.Visibility = Visibility.Visible;
+                                if (tries >= 5)
+                                {
+
+                                }
+                                else
+                                {
+                                    tries++;
+                                }
+                            }
+
                         }
-                        else
-                        {
-                            
-
-                            passLabel.Foreground = new SolidColorBrush(Colors.Red);
-
-                            passLabel.Content = strings[tries];
-                            passLabel.Visibility = Visibility.Visible;
-                            tries++;
-                        }
-
                     }
 
+                    catch(Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
 
 
                     break;
 
                 case "Юрист":
 
-                    using (var context = new PostgresContext())
+                    try
                     {
-
-                        var entity = context.LawyerAcces.FirstOrDefault(e => e.Idemployee == userId);
-                        
-                        String[] strings = new string[] { "Не прошел", "Ошибка", "Попробуй 12345", "Взламываешь?", "Может позовешь кого-нибудь", "Не верные данные" };
-                        if (entity != null && entity.EmployeePassword == userPassword)
+                        using (var context = new PostgresContext())
                         {
 
-                            passLabel.Content = "Passed";
-
-                            passLabel.Visibility = Visibility.Visible;
-                            string filePath = "example.txt";
-
-                            using (StreamWriter writer = new StreamWriter(filePath))
+                            var entity = context.LawyerAcces.FirstOrDefault(e => e.Idemployee == userId);
+                            string hash = "";
+                            using (SHA256 sha256Hash = SHA256.Create())
                             {
+                                byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(
+                                    userPassword));
 
-                                String str = userId.ToString();
+                                // Конвертируем байты в строку
+                                StringBuilder builder = new StringBuilder();
+                                for (int i = 0; i < bytes.Length; i++)
+                                {
+                                    builder.Append(bytes[i].ToString("x2"));
+                                }
 
-
-
-                                writer.WriteLine(str);
+                                hash = builder.ToString();
 
                             }
-                            LawyerWindow lawyer = new LawyerWindow();
+                            String[] strings = new string[] { "Не прошел", "Ошибка", "Попробуй 12345", "Взламываешь?", "Может позовешь кого-нибудь", "Не верные данные" };
+                            string employeeHash = "";
+                            using (SHA256 sha256Hash = SHA256.Create())
+                            {
+                                byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(
+                                    entity.EmployeePassword));
 
-                            lawyer.Show();
-                            MainWindow main = new MainWindow();
-                            this.Close();
+                                // Конвертируем байты в строку
+                                StringBuilder builder = new StringBuilder();
+                                for (int i = 0; i < bytes.Length; i++)
+                                {
+                                    builder.Append(bytes[i].ToString("x2"));
+                                }
+
+                                employeeHash = builder.ToString();
+
+                            }
+
+                            if (entity != null && employeeHash == hash)
+                            {
+
+                                passLabel.Content = "Passed";
+
+                                passLabel.Visibility = Visibility.Visible;
+                                string filePath = "example.txt";
+
+                                using (StreamWriter writer = new StreamWriter(filePath))
+                                {
+
+                                    String str = userId.ToString();
+
+
+
+                                    writer.WriteLine(str);
+
+                                }
+                                LawyerWindow lawyer = new LawyerWindow();
+
+                                lawyer.Show();
+                                MainWindow main = new MainWindow();
+                                this.Close();
+                            }
+                            else
+                            {
+
+
+                                passLabel.Foreground = new SolidColorBrush(Colors.Red);
+
+                                passLabel.Content = strings[tries];
+                                passLabel.Visibility = Visibility.Visible;
+                                if (tries >= 5)
+                                {
+                                    tries = tries;
+                                }
+                                else
+                                {
+                                    tries++;
+                                }
+                            }
+
                         }
-                        else
-                        {
-
-
-                            passLabel.Foreground = new SolidColorBrush(Colors.Red);
-
-                            passLabel.Content = strings[tries];
-                            passLabel.Visibility = Visibility.Visible;
-                        }
-
+                    }
+                    catch(Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
                     }
                     break;
 
